@@ -1,6 +1,9 @@
 /* Importación principal de Tailwind CSS v4 */
 @import "tailwindcss";
 
+/* Plugin de Iconify para usar iconos como utilidades de Tailwind */
+@plugin "@iconify/tailwind4";
+
 /*
   Paleta de colores corporativa - Tránsito / Servicios Digitales
 
