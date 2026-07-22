@@ -1,0 +1,21 @@
+/* Importación principal de Tailwind CSS v4 */
+@import "tailwindcss";
+
+/*
+  Paleta de colores corporativa - Tránsito / Servicios Digitales
+
+  - Utilidades de Tailwind: bg-azul-oscuro, text-azul-claro, border-amarillo, etc.
+  - Variables CSS globales: var(--azul-oscuro), var(--azul-claro), var(--amarillo)
+*/
+@theme {
+  --color-azul-oscuro: #16255b;
+  --color-azul-claro: #2ea8d3;
+  --color-amarillo: #f9ae00;
+}
+
+/* Variables CSS globales en :root para uso directo en CSS/SCSS */
+:root {
+  --azul-oscuro: #16255b;
+  --azul-claro: #2ea8d3;
+  --amarillo: #f9ae00;
+}
