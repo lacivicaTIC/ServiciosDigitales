@@ -1,0 +1,19 @@
+<app-auth-layout
+  headline="Crea tu cuenta y agenda en minutos."
+  highlightedWord="minutos"
+  subheadline="Un solo registro para todos tus trámites de tránsito: matrículas, licencias, traspasos y más."
+  [features]="[
+    { icon: 'icon-[mdi--check-circle]', text: 'Historial completo de tus citas' },
+    { icon: 'icon-[mdi--check-circle]', text: 'Recordatorios automáticos' },
+    { icon: 'icon-[mdi--check-circle]', text: 'Gestión familiar bajo un mismo usuario' },
+    { icon: 'icon-[mdi--check-circle]', text: 'Datos protegidos y verificados' }
+  ]"
+  pageTitle="Crea tu cuenta"
+  pageSubtitle="Completa tus datos para acceder al portal de trámites."
+  footerText="¿Ya tienes cuenta?"
+  footerLinkText="Inicia sesión"
+  footerLink="/login"
+  [wideForm]="true"
+>
+  <app-register-form></app-register-form>
+</app-auth-layout>

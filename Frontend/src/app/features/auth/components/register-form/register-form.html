@@ -1,0 +1,190 @@
+<form
+  [formGroup]="registerForm"
+  (ngSubmit)="onSubmit()"
+  class="space-y-5 form-register shadow-lg"
+  aria-label="Formulario de registro"
+>
+  <!-- Datos personales -->
+  <div class="mb-6">
+    <h3 class="mb-3 text-xs font-semibold uppercase tracking-wider text-slate-500">
+      Datos personales
+    </h3>
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+      <app-input-field
+        label="Nombre"
+        type="text"
+        placeholder="Ej. Juan"
+        iconClass="icon-[mdi--account]"
+        inputId="register-first-name"
+        autocomplete="given-name"
+        [required]="true"
+        [minlength]="2"
+        [control]="registerForm.controls.firstName"
+        [errorMessages]="firstNameErrors"
+      ></app-input-field>
+
+      <app-input-field
+        label="Apellidos"
+        type="text"
+        placeholder="Ej. Pérez Gómez"
+        iconClass="icon-[mdi--account]"
+        inputId="register-last-name"
+        autocomplete="family-name"
+        [required]="true"
+        [minlength]="2"
+        [control]="registerForm.controls.lastName"
+        [errorMessages]="lastNameErrors"
+      ></app-input-field>
+    </div>
+  </div>
+
+  <!-- Identificación -->
+  <div class="mb-6">
+    <h3 class="mb-3 text-xs font-semibold uppercase tracking-wider text-slate-500">
+      Identificación
+    </h3>
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+      <app-select-field
+        label="Tipo de documento"
+        placeholder="Selecciona"
+        iconClass="icon-[mdi--card-account-details]"
+        inputId="register-document-type"
+        [required]="true"
+        [control]="registerForm.controls.documentType"
+        [errorMessages]="documentTypeErrors"
+        [options]="documentTypeOptions"
+      ></app-select-field>
+
+      <app-input-field
+        label="Número de documento"
+        type="text"
+        placeholder="1234567890"
+        iconClass="icon-[mdi--identifier]"
+        inputId="register-document-number"
+        autocomplete="off"
+        [required]="true"
+        [minlength]="5"
+        pattern="[0-9]*"
+        [control]="registerForm.controls.documentNumber"
+        [errorMessages]="documentNumberErrors"
+      ></app-input-field>
+    </div>
+  </div>
+
+  <!-- Contacto -->
+  <div class="mb-6">
+    <h3 class="mb-3 text-xs font-semibold uppercase tracking-wider text-slate-500">
+      Contacto
+    </h3>
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+      <app-input-field
+        label="Teléfono"
+        type="tel"
+        placeholder="3001234567"
+        iconClass="icon-[mdi--phone]"
+        inputId="register-phone"
+        autocomplete="tel"
+        [required]="true"
+        [minlength]="10"
+        pattern="[0-9]*"
+        [control]="registerForm.controls.phone"
+        [errorMessages]="phoneErrors"
+      ></app-input-field>
+
+      <app-input-field
+        label="Dirección"
+        type="text"
+        placeholder="Cra 10 # 20 - 30"
+        iconClass="icon-[mdi--map-marker]"
+        inputId="register-address"
+        autocomplete="street-address"
+        [required]="true"
+        [minlength]="5"
+        [control]="registerForm.controls.address"
+        [errorMessages]="addressErrors"
+      ></app-input-field>
+    </div>
+  </div>
+
+  <!-- Correo electrónico -->
+  <div class="mb-6">
+    <app-input-field
+      label="Correo electrónico"
+      type="email"
+      placeholder="tu@correo.com"
+      iconClass="icon-[mdi--email]"
+      inputId="register-email"
+      autocomplete="email"
+      [required]="true"
+      [control]="registerForm.controls.email"
+      [errorMessages]="emailErrors"
+    ></app-input-field>
+  </div>
+
+  <!-- Tarjeta informativa -->
+  <div
+    class="mb-6 flex items-start gap-3 rounded-lg border border-azul-claro/30 bg-azul-claro/10 p-4"
+  >
+    <span
+      class="mt-0.5 text-xl text-azul-oscuro icon-[mdi--key]"
+      aria-hidden="true"
+    ></span>
+    <div>
+      <p class="text-sm font-semibold text-azul-oscuro">
+        Enviaremos una contraseña temporal a tu correo
+      </p>
+      <p class="mt-0.5 text-xs text-slate-700">
+        Al iniciar sesión por primera vez con esa clave, podrás crear tu contraseña definitiva.
+      </p>
+    </div>
+  </div>
+
+  <!-- Términos y condiciones -->
+  <div class="mb-6">
+    <label
+      for="register-terms"
+      class="flex cursor-pointer items-start gap-3"
+    >
+      <input
+        id="register-terms"
+        type="checkbox"
+        [formControl]="registerForm.controls.terms"
+        class="mt-0.5 h-4 w-4 cursor-pointer rounded border-slate-300 text-azul-oscuro focus:ring-azul-oscuro"
+      />
+      <span class="select-none text-sm leading-tight text-slate-700">
+        Acepto los
+        <a
+          routerLink="/terminos"
+          class="font-medium text-azul-oscuro underline hover:text-azul-claro focus:outline-none focus:ring-2 focus:ring-azul-oscuro rounded"
+        >
+          términos y condiciones
+        </a>
+        y la
+        <a
+          routerLink="/privacidad"
+          class="font-medium text-azul-oscuro underline hover:text-azul-claro focus:outline-none focus:ring-2 focus:ring-azul-oscuro rounded"
+        >
+          política de tratamiento de datos
+        </a>
+        de la Secretaría de Tránsito.
+      </span>
+    </label>
+
+    @if (registerForm.controls.terms.invalid && registerForm.controls.terms.touched) {
+      <p
+        id="register-terms-error"
+        class="mt-1.5 text-xs text-red-600"
+        role="alert"
+      >
+        {{ termsError }}
+      </p>
+    }
+  </div>
+
+  <app-auth-button
+    label="Crear cuenta"
+    type="submit"
+    iconClass="icon-[mdi--arrow-right]"
+    [disabled]="registerForm.invalid && registerForm.touched"
+  ></app-auth-button>
+</form>

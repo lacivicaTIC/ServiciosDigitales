@@ -1,0 +1,68 @@
+<form
+  [formGroup]="loginForm"
+  (ngSubmit)="onSubmit()"
+  class="space-y-5 form-login shadow-lg"
+  aria-label="Formulario de inicio de sesión"
+>
+  <app-input-field
+    label="Correo electrónico"
+    type="email"
+    placeholder="tu@correo.com"
+    iconClass="icon-[mdi--email]"
+    inputId="login-email"
+    autocomplete="email"
+    [required]="true"
+    [control]="loginForm.controls.email"
+    [errorMessages]="emailErrors"
+  ></app-input-field>
+
+  <div>
+    <div class="flex items-center justify-between mb-1.5">
+      <label for="login-password" class="text-sm font-medium text-slate-700">
+        Contraseña
+      </label>
+      <a
+        routerLink="/forgot-password"
+        class="text-xs font-medium text-azul-oscuro hover:underline focus:outline-none focus:ring-2 focus:ring-azul-oscuro rounded"
+      >
+        ¿Olvidaste tu contraseña?
+      </a>
+    </div>
+
+    <app-input-field
+      type="password"
+      placeholder="••••••••"
+      iconClass="icon-[mdi--lock]"
+      inputId="login-password"
+      autocomplete="current-password"
+      [required]="true"
+      [minlength]="6"
+      [control]="loginForm.controls.password"
+      [errorMessages]="passwordErrors"
+      [showTogglePassword]="true"
+    ></app-input-field>
+  </div>
+
+  <app-radio-card
+    label="Es mi primer ingreso (contraseña temporal)"
+    subtext="Te llevaremos a crear tu contraseña definitiva."
+    iconClass="icon-[mdi--information-outline]"
+    name="firstLogin"
+    value="true"
+    inputId="first-login"
+    [control]="loginForm.controls.firstLogin"
+  ></app-radio-card>
+
+  <app-checkbox-field
+    label="Recordarme en este dispositivo"
+    inputId="remember-me"
+    [control]="loginForm.controls.rememberMe"
+  ></app-checkbox-field>
+
+  <app-auth-button
+    label="Iniciar sesión"
+    iconClass="icon-[mdi--arrow-right]"
+    type="submit"
+    [disabled]="loginForm.invalid && loginForm.touched"
+  ></app-auth-button>
+</form>

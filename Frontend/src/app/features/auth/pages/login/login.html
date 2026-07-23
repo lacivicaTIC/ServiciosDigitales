@@ -1,0 +1,18 @@
+<app-auth-layout
+  headline="Gestiona tus trámites de forma rápida y segura."
+  highlightedWord="rápida y segura."
+  subheadline="Agenda citas, solicita turnos y realiza pagos en línea desde un solo lugar."
+  [features]="[
+    { icon: 'icon-[mdi--calendar-clock]', text: 'Agenda citas con disponibilidad en tiempo real' },
+    { icon: 'icon-[mdi--timer-outline]', text: 'Consulta el estado de tus trámites' },
+    { icon: 'icon-[mdi--shield-check]', text: 'Realiza pagos en línea de forma segura' },
+    { icon: 'icon-[mdi--information-variant-circle-outline]', text: 'Información protegida por la Secretaría de Tránsito' }
+  ]"
+  pageTitle="Bienvenido de vuelta"
+  pageSubtitle="Inicia sesión con tu correo y contraseña."
+  footerText="¿No tienes cuenta?"
+  footerLinkText="Regístrate aquí"
+  footerLink="/register"
+>
+  <app-login-form></app-login-form>
+</app-auth-layout>

@@ -1,0 +1,53 @@
+<div class="select-field-wrapper">
+  <label
+    [for]="inputId || label"
+    class="block text-sm font-medium text-slate-700 mb-1.5"
+  >
+    {{ label }}
+  </label>
+
+  <div
+    class="flex flex-wrap items-center gap-x-3 gap-y-0 rounded-lg border border-slate-300 bg-white px-3 py-2.5 transition focus-within:border-azul-oscuro focus-within:ring-2 focus-within:ring-azul-oscuro/20"
+    [class.border-red-500]="control.invalid && control.touched"
+    [class.focus-within:border-red-500]="control.invalid && control.touched"
+    [class.focus-within:ring-red-500/20]="control.invalid && control.touched"
+  >
+    @if (iconClass) {
+      <span
+        class="text-slate-400 text-xl"
+        [class]="iconClass"
+        aria-hidden="true"
+      ></span>
+    }
+
+    <select
+      [id]="inputId || label"
+      [formControl]="control"
+      [required]="required"
+      class="min-w-0 flex-1 bg-transparent py-0 text-sm text-slate-900 outline-none appearance-none"
+      [class.text-red-900]="control.invalid && control.touched"
+      [attr.aria-label]="label"
+      [attr.aria-invalid]="control.invalid && control.touched"
+      [attr.aria-describedby]="(inputId || label) + '-error'"
+    >
+      <option value="" disabled selected>{{ placeholder }}</option>
+      @for (option of options; track option.value) {
+        <option [value]="option.value">{{ option.label }}</option>
+      }
+    </select>
+
+    <span
+      class="text-slate-400 text-xl icon-[mdi--chevron-down] pointer-events-none"
+      aria-hidden="true"
+    ></span>
+  </div>
+
+  <p
+    [id]="(inputId || label) + '-error'"
+    class="mt-1.5 text-xs text-red-600"
+    [class.hidden]="!(control.invalid && control.touched)"
+    role="alert"
+  >
+    {{ errorMessage }}
+  </p>
+</div>

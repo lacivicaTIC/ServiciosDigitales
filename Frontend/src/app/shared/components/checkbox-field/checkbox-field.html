@@ -1,0 +1,29 @@
+<div class="checkbox-field-wrapper">
+  <label
+    [for]="inputId || label"
+    class="flex items-start gap-3 cursor-pointer group"
+  >
+    <input
+      [id]="inputId || label"
+      type="checkbox"
+      [formControl]="control"
+      class="mt-0.5 h-4 w-4 rounded border-slate-300 text-azul-oscuro focus:ring-azul-oscuro cursor-pointer"
+      [attr.aria-label]="label"
+      [attr.aria-invalid]="control.invalid && control.touched"
+      [attr.aria-describedby]="control.invalid && control.touched && errorMessage ? (inputId || label) + '-error' : null"
+    />
+    <span class="text-sm text-slate-700 leading-tight select-none">
+      {{ label }}
+    </span>
+  </label>
+
+  @if (control.invalid && control.touched && errorMessage) {
+    <p
+      [id]="(inputId || label) + '-error'"
+      class="mt-1.5 text-xs text-red-600"
+      role="alert"
+    >
+      {{ errorMessage }}
+    </p>
+  }
+</div>

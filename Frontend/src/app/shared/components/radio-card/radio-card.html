@@ -1,0 +1,53 @@
+<div
+  class="radio-card-wrapper relative rounded-xl border-2 p-4 cursor-pointer transition"
+  [class.border-azul-oscuro]="isChecked"
+  [class.bg-azul-oscuro/5]="isChecked"
+  [class.border-slate-200]="!isChecked"
+  [class.bg-white]="!isChecked"
+  [class.hover:border-azul-claro]="!isChecked"
+  (click)="select()"
+  role="radio"
+  [attr.aria-checked]="isChecked"
+  [attr.aria-label]="label"
+>
+  <input
+    type="radio"
+    class="sr-only"
+    [id]="inputId || value"
+    [name]="name"
+    [value]="value"
+    [checked]="isChecked"
+    [formControl]="control"
+  />
+
+  <div class="flex items-start gap-3">
+    @if (iconClass) {
+      <span
+        class="mt-0.5 text-azul-oscuro text-xl shrink-0"
+        [class]="iconClass"
+        aria-hidden="true"
+      ></span>
+    }
+
+    <div class="flex-1 min-w-0">
+      <div class="flex items-center justify-between gap-2">
+        <span class="text-sm font-semibold text-slate-900">
+          {{ label }}
+        </span>
+
+        <span
+          class="h-4 w-4 rounded-full border-2 shrink-0 transition"
+          [class.border-azul-oscuro]="isChecked"
+          [class.bg-azul-oscuro]="isChecked"
+          [class.border-slate-300]="!isChecked"
+        ></span>
+      </div>
+
+      @if (subtext) {
+        <p class="mt-0.5 text-xs text-slate-500 leading-relaxed">
+          {{ subtext }}
+        </p>
+      }
+    </div>
+  </div>
+</div>
