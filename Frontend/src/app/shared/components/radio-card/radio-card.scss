@@ -2,6 +2,10 @@
   display: block;
 }
 
+.radio-card-wrapper {
+  background-color: rgb(242, 247, 250);
+}
+
 .radio-card-wrapper:focus-within {
   outline: 2px solid var(--azul-oscuro);
   outline-offset: 2px;

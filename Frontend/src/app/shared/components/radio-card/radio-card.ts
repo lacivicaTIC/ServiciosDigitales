@@ -17,13 +17,18 @@ export class RadioCardComponent {
   @Input() value = '';
   @Input() control: FormControl = new FormControl();
   @Input() inputId = '';
+  @Input() toggleable = false;
 
   protected get isChecked(): boolean {
     return this.control.value === this.value;
   }
 
   protected select(): void {
-    this.control.setValue(this.value);
+    if (this.toggleable && this.isChecked) {
+      this.control.setValue(null);
+    } else {
+      this.control.setValue(this.value);
+    }
     this.control.markAsTouched();
   }
 }
