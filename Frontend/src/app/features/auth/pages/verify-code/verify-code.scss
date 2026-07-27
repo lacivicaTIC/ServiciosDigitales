@@ -1,0 +1,13 @@
+/* verify-code styles are handled with Tailwind utility classes */
+.container-from {
+  border: solid 1px oklch(90% 0.015 240deg);
+  border-radius: 15px;
+  padding: 38px 26px;
+  background-color: #fff;
+}
+
+.container-reenviar {
+  padding: 13px 30px;
+  border-radius: 10px;
+  margin: 22px 24px;
+}

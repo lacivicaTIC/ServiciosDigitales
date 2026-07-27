@@ -1,0 +1,21 @@
+<div
+  class="flex justify-center gap-3"
+  role="group"
+  aria-label="Código de verificación de 6 dígitos"
+>
+  @for (index of digitIndexes; track index) {
+    <input
+      #digitInput
+      type="text"
+      inputmode="numeric"
+      pattern="[0-9]*"
+      maxlength="1"
+      autocomplete="one-time-code"
+      [attr.aria-label]="'Dígito ' + (index + 1) + ' del código'"
+      class="h-14 w-14 rounded-lg border border-slate-300 bg-white text-center text-2xl font-semibold text-slate-900 outline-none transition focus:border-azul-oscuro focus:ring-2 focus:ring-azul-oscuro/20"
+      (input)="onInput($event, index)"
+      (keydown)="onKeydown($event, index)"
+      (paste)="onPaste($event, index)"
+    />
+  }
+</div>

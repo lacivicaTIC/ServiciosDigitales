@@ -14,6 +14,17 @@
     </header>
 
     <div class="max-w-lg">
+      @if (badge) {
+        <div class="mb-4 inline-flex items-center gap-2 rounded-full border border-amarillo/30 bg-amarillo/10 px-3 py-1">
+          <span
+            class="text-amarillo text-sm"
+            [class]="badgeIcon || 'icon-[mdi--key]'"
+            aria-hidden="true"
+          ></span>
+          <span class="text-xs font-medium text-amarillo">{{ badge }}</span>
+        </div>
+      }
+
       <h1 class="text-4xl xl:text-5xl font-bold leading-tight">
         {{ headlineParts.before }}@if (headlineParts.word) {<span class="text-amarillo">{{ headlineParts.word }}</span>}{{ headlineParts.after }}
       </h1>

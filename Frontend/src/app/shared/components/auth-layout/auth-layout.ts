@@ -31,6 +31,8 @@ export class AuthLayoutComponent {
   @Input() footerLinkText = '';
   @Input() footerLink = '';
   @Input() wideForm = false;
+  @Input() badge = '';
+  @Input() badgeIcon = '';
 
   protected get headlineParts(): { before: string; word: string; after: string } {
     const word = this.highlightedWord?.trim();

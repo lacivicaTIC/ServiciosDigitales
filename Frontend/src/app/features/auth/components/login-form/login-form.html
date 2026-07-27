@@ -16,17 +16,24 @@
     [errorMessages]="emailErrors"
   ></app-input-field>
 
+  @if (showForgotPasswordHint()) {
+    <p class="mt-1.5 text-xs text-azul-oscuro" role="alert">
+      Ingresa tu correo electrónico para recuperar tu contraseña.
+    </p>
+  }
+
   <div>
     <div class="flex items-center justify-between mb-1.5">
       <label for="login-password" class="text-sm font-medium text-slate-700">
         Contraseña
       </label>
-      <a
-        routerLink="/forgot-password"
+      <button
+        type="button"
         class="text-xs font-medium text-azul-oscuro hover:underline focus:outline-none focus:ring-2 focus:ring-azul-oscuro rounded"
+        (click)="onForgotPassword()"
       >
         ¿Olvidaste tu contraseña?
-      </a>
+      </button>
     </div>
 
     <app-input-field

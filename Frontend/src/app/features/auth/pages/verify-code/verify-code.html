@@ -1,0 +1,46 @@
+<app-auth-layout
+  headline="Valida tu identidad."
+  highlightedWord="identidad"
+  subheadline="Enviamos un código de 6 dígitos a tu correo. Escríbelo aquí para continuar con el restablecimiento de contraseña."
+  [features]="features"
+  badge="Recuperar acceso"
+  badgeIcon="icon-[mdi--key]"
+  pageTitle="Verificar código"
+  pageSubtitle="Ingresa el código de 6 dígitos que enviamos a tu correo electrónico."
+  footerText="¿Recordaste tu contraseña?"
+  footerLinkText="Volver a iniciar sesión"
+  footerLink="/login"s
+>
+  <div class="space-y-5 shadow-lg container-from">
+    <app-code-input (codeChange)="onCodeChange($event)"></app-code-input>
+
+    <p class="text-center text-xs text-slate-500 mt-3">
+      Puedes pegar el código completo desde el correo.
+    </p>
+
+    <div class="flex items-center justify-between gap-1 text-sm container-reenviar border border-azul-claro/30 bg-azul-claro/10">
+      <span class="text-slate-600">¿No recibiste el código?</span>
+      <button
+        type="button"
+        class="font-semibold text-azul-oscuro hover:underline focus:outline-none focus:ring-2 focus:ring-azul-oscuro rounded flex justify-center items-center gap-1.5"
+      >
+      <span class="icon-[mdi--reload]"></span>
+        Reenviar
+      </button>
+    </div>
+
+    @if (error()) {
+      <p class="text-center text-xs text-red-600" role="alert">
+        {{ error() }}
+      </p>
+    }
+
+    <app-auth-button
+      label="Verificar código"
+      iconClass="icon-[mdi--arrow-right]"
+      type="button"
+      [disabled]="code().length !== 6"
+      (click)="onVerify()"
+    ></app-auth-button>
+  </div>
+</app-auth-layout>

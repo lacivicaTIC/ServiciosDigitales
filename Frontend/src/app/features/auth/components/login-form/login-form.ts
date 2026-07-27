@@ -1,7 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 
 import { InputFieldComponent } from '../../../../shared/components/input-field/input-field';
 import { CheckboxFieldComponent } from '../../../../shared/components/checkbox-field/checkbox-field';
@@ -14,7 +14,6 @@ import { AuthButtonComponent } from '../../../../shared/components/auth-button/a
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    RouterLink,
     InputFieldComponent,
     CheckboxFieldComponent,
     RadioCardComponent,
@@ -25,6 +24,9 @@ import { AuthButtonComponent } from '../../../../shared/components/auth-button/a
 })
 export class LoginFormComponent {
   private readonly fb = inject(FormBuilder);
+  private readonly router = inject(Router);
+
+  protected readonly showForgotPasswordHint = signal(false);
 
   protected readonly loginForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
@@ -51,5 +53,18 @@ export class LoginFormComponent {
 
     // TODO: connect with backend when required
     console.log('Login payload:', this.loginForm.value);
+  }
+
+  protected onForgotPassword(): void {
+    const emailControl = this.loginForm.controls.email;
+    this.showForgotPasswordHint.set(false);
+
+    if (!emailControl.value || emailControl.invalid) {
+      emailControl.markAsTouched();
+      this.showForgotPasswordHint.set(true);
+      return;
+    }
+
+    this.router.navigate(['/auth/verify-code']);
   }
 }
