@@ -1,0 +1,18 @@
+<div class="flex min-h-screen w-full bg-slate-50">
+  <!-- Sidebar -->
+  <app-sidebar
+    [mobileOpen]="sidebarOpen()"
+    (closeSidebar)="closeSidebar()"
+  ></app-sidebar>
+
+  <!-- Main wrapper -->
+  <div class="flex flex-1 flex-col">
+    <!-- Top header -->
+    <app-top-header (openSidebar)="openSidebar()"></app-top-header>
+
+    <!-- Page content -->
+    <main class="flex-1 p-4 lg:p-8">
+      <router-outlet />
+    </main>
+  </div>
+</div>
