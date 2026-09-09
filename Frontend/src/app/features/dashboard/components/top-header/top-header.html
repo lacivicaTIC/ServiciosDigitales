@@ -1,0 +1,55 @@
+<header
+  class="sticky top-0 z-30 flex w-full items-center justify-between gap-4 border-b border-slate-200 bg-white px-4 py-4 shadow-sm lg:px-8"
+  aria-label="Encabezado del dashboard"
+>
+  <!-- Left -->
+  <div class="flex items-center gap-3">
+    <button
+      type="button"
+      class="inline-flex items-center justify-center rounded-lg p-2 text-azul-oscuro hover:bg-slate-100 lg:hidden"
+      (click)="onMenuClick()"
+      aria-label="Abrir menú"
+    >
+      <span class="icon-[mdi--menu] text-2xl" aria-hidden="true"></span>
+    </button>
+
+    <div>
+      <h1 class="text-lg font-bold text-azul-oscuro lg:text-xl">Panel de inicio</h1>
+      <p class="hidden text-xs text-slate-500 sm:block">Resumen general del sistema de citas</p>
+    </div>
+  </div>
+
+  <!-- Right -->
+  <div class="flex items-center gap-2 sm:gap-4">
+    <!-- Search -->
+    <div class="relative hidden sm:block">
+      <span
+        class="icon-[mdi--magnify] absolute left-3 top-1/2 -translate-y-1/2 text-lg text-slate-400"
+        aria-hidden="true"
+      ></span>
+      <input
+        type="text"
+        placeholder="Buscar..."
+        class="h-9 w-56 rounded-lg border border-slate-200 bg-slate-50 pl-9 pr-3 text-sm text-slate-700 placeholder:text-slate-400 focus:border-azul-claro focus:bg-white focus:outline-none focus:ring-2 focus:ring-azul-claro/20 lg:w-72"
+      />
+    </div>
+
+    <!-- Notifications -->
+    <button
+      type="button"
+      class="relative inline-flex items-center justify-center rounded-lg p-2 text-slate-600 hover:bg-slate-100"
+      aria-label="Notificaciones"
+    >
+      <span class="icon-[mdi--bell] text-2xl" aria-hidden="true"></span>
+      <span class="absolute right-2 top-2 h-2 w-2 rounded-full bg-amarillo"></span>
+    </button>
+
+    <!-- Profile -->
+    <div class="flex items-center gap-2 pl-2 sm:border-l sm:border-slate-200">
+      <div class="flex h-9 w-9 items-center justify-center rounded-full bg-azul-claro/10">
+        <span class="icon-[mdi--account] text-xl text-azul-claro" aria-hidden="true"></span>
+      </div>
+      <span class="hidden text-sm font-medium text-azul-oscuro md:block">Funcionario Ventanilla</span>
+    </div>
+  </div>
+</header>
