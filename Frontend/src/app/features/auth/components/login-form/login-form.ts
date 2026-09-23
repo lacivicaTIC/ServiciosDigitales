@@ -1,12 +1,20 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  ReactiveFormsModule,
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+  FormControl
+} from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { InputFieldComponent } from '../../../../shared/components/input-field/input-field';
 import { CheckboxFieldComponent } from '../../../../shared/components/checkbox-field/checkbox-field';
 import { RadioCardComponent } from '../../../../shared/components/radio-card/radio-card';
 import { AuthButtonComponent } from '../../../../shared/components/auth-button/auth-button';
+
+import { AuthController } from '../../../../controllers/auth-controller';
 
 @Component({
   selector: 'app-login-form',
@@ -22,49 +30,87 @@ import { AuthButtonComponent } from '../../../../shared/components/auth-button/a
   templateUrl: './login-form.html',
   styleUrl: './login-form.scss'
 })
-export class LoginFormComponent {
-  private readonly fb = inject(FormBuilder);
-  private readonly router = inject(Router);
+export class LoginFormComponent implements OnInit {
+
+  hide = true;
+
+  loading = false;
+  submitted = false;
+
+  authForm!: UntypedFormGroup;
 
   protected readonly showForgotPasswordHint = signal(false);
 
-  protected readonly loginForm = this.fb.group({
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.minLength(6)]],
-    firstLogin: [false],
-    rememberMe: [false]
-  });
+  constructor(
+    public formBuilder: UntypedFormBuilder,
+    private _controllerAuth: AuthController,
+    public router: Router
+  ) {}
 
+  ngOnInit(): void {
+    this._controllerAuth.init(this);
+  }
+
+  /**
+   * Envía el formulario al AuthController
+   */
+  protected onSubmit(): void {
+    this._controllerAuth.onSubmit(this);
+  }
+
+  /**
+   * Mostrar ayuda para recuperar contraseña
+   */
+  protected onForgotPassword(): void {
+    this.showForgotPasswordHint.set(true);
+
+    const emailControl = this.authForm.get('email');
+
+    if (emailControl) {
+      emailControl.markAsTouched();
+      emailControl.markAsDirty();
+    }
+  }
+
+  /**
+   * Controles del formulario
+   *
+   * Se convierten explícitamente a FormControl para
+   * que los componentes InputField y CheckboxField
+   * no reciban AbstractControl.
+   */
+  get emailControl(): FormControl {
+    return this.authForm.get('email') as FormControl;
+  }
+
+  get passwordControl(): FormControl {
+    return this.authForm.get('password') as FormControl;
+  }
+
+  get rememberMeControl(): FormControl {
+    return this.authForm.get('rememberMe') as FormControl;
+  }
+
+  /**
+   * Acceso corto a los controles para AuthController
+   */
+  get f() {
+    return this.authForm.controls;
+  }
+
+  /**
+   * Mensajes de error del correo
+   */
   protected readonly emailErrors: Record<string, string> = {
     required: 'El correo electrónico es obligatorio.',
     email: 'Ingresa un correo electrónico válido.'
   };
 
+  /**
+   * Mensajes de error de contraseña
+   */
   protected readonly passwordErrors: Record<string, string> = {
     required: 'La contraseña es obligatoria.',
     minlength: 'La contraseña debe tener al menos 6 caracteres.'
   };
-
-  protected onSubmit(): void {
-    if (this.loginForm.invalid) {
-      this.loginForm.markAllAsTouched();
-      return;
-    }
-
-    // TODO: connect with backend when required
-    console.log('Login payload:', this.loginForm.value);
-  }
-
-  protected onForgotPassword(): void {
-    const emailControl = this.loginForm.controls.email;
-    this.showForgotPasswordHint.set(false);
-
-    if (!emailControl.value || emailControl.invalid) {
-      emailControl.markAsTouched();
-      this.showForgotPasswordHint.set(true);
-      return;
-    }
-
-    this.router.navigate(['/auth/verify-code']);
-  }
 }

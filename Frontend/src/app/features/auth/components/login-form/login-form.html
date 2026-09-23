@@ -1,9 +1,11 @@
 <form
-  [formGroup]="loginForm"
+  [formGroup]="authForm"
   (ngSubmit)="onSubmit()"
   class="space-y-5 form-login shadow-lg"
   aria-label="Formulario de inicio de sesión"
 >
+
+  <!-- CORREO ELECTRÓNICO -->
   <app-input-field
     label="Correo electrónico"
     type="email"
@@ -12,29 +14,44 @@
     inputId="login-email"
     autocomplete="email"
     [required]="true"
-    [control]="loginForm.controls.email"
+    [control]="emailControl"
     [errorMessages]="emailErrors"
   ></app-input-field>
 
+
+  <!-- MENSAJE RECUPERAR CONTRASEÑA -->
   @if (showForgotPasswordHint()) {
-    <p class="mt-1.5 text-xs text-azul-oscuro" role="alert">
+    <p
+      class="mt-1.5 text-xs text-azul-oscuro"
+      role="alert"
+    >
       Ingresa tu correo electrónico para recuperar tu contraseña.
     </p>
   }
 
+
+  <!-- CONTRASEÑA -->
   <div>
+
     <div class="flex items-center justify-between mb-1.5">
-      <label for="login-password" class="text-sm font-medium text-slate-700">
+
+      <label
+        for="login-password"
+        class="text-sm font-medium text-slate-700"
+      >
         Contraseña
       </label>
+
       <button
         type="button"
-        class="text-xs font-medium text-azul-oscuro hover:underline focus:outline-none focus:ring-2 focus:ring-azul-oscuro rounded"
         (click)="onForgotPassword()"
+        class="text-xs font-medium text-azul-oscuro hover:underline focus:outline-none focus:ring-2 focus:ring-azul-oscuro rounded"
       >
         ¿Olvidaste tu contraseña?
       </button>
+
     </div>
+
 
     <app-input-field
       type="password"
@@ -44,33 +61,29 @@
       autocomplete="current-password"
       [required]="true"
       [minlength]="6"
-      [control]="loginForm.controls.password"
+      [control]="passwordControl"
       [errorMessages]="passwordErrors"
       [showTogglePassword]="true"
     ></app-input-field>
+
   </div>
 
-  <app-radio-card
-    label="Es mi primer ingreso (contraseña temporal)"
-    subtext="Te llevaremos a crear tu contraseña definitiva."
-    iconClass="icon-[mdi--information-outline]"
-    name="firstLogin"
-    value="true"
-    inputId="first-login"
-    [toggleable]="true"
-    [control]="loginForm.controls.firstLogin"
-  ></app-radio-card>
 
+  <!-- RECORDAR SESIÓN -->
   <app-checkbox-field
     label="Recordarme en este dispositivo"
     inputId="remember-me"
-    [control]="loginForm.controls.rememberMe"
+    [control]="rememberMeControl"
   ></app-checkbox-field>
 
+
+  <!-- BOTÓN LOGIN -->
   <app-auth-button
     label="Iniciar sesión"
     iconClass="icon-[mdi--arrow-right]"
     type="submit"
-    [disabled]="loginForm.invalid && loginForm.touched"
+    [disabled]="authForm.invalid"
+    [loading]="loading"
   ></app-auth-button>
+
 </form>
