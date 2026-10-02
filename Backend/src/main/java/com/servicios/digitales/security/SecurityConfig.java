@@ -23,7 +23,7 @@ public class SecurityConfig {
                                 "/v1/rest/api/login/cerrarsession/**",
                                 "/v1/rest/api/login/banner",
                                 "/v1/rest/api/tipodocumento/listar",
-                                "/v1/rest/api/categoriapersona/listar",
+                                "/v1/rest/api/tipoliquidacion/listar",
                                 "/swagger-ui/**",              // swagger UI
                                 "/v3/api-docs/**",             // api docs JSON
                                 "/swagger-resources/**",       // swagger resources
