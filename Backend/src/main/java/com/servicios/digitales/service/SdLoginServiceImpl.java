@@ -101,7 +101,7 @@ public class SdLoginServiceImpl implements ISdLoginService{
                 // llenar el menu segun los permisos de los usuarios
                 _response.setPermisos(usuariosRepository.obtenerMenu(user.get().getId()));
                // Servidor servidor = servidorRepository.findById(Long.parseLong("1")).get();
-              //  _response.setHoraInicio(servidor);
+
                 _response.setUsuario(user.get());
 
                 SdSession _session = new SdSession();
