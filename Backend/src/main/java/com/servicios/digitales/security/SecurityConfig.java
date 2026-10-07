@@ -25,6 +25,7 @@ public class SecurityConfig {
                                 "/v1/rest/api/tipodocumento/listar",
                                 "/v1/rest/api/tipoliquidacion/listar",
                                 "/swagger-ui/**",              // swagger UI
+                                "/swagger-ui.html/**",
                                 "/v3/api-docs/**",             // api docs JSON
                                 "/swagger-resources/**",       // swagger resources
                                 "/webjars/**"

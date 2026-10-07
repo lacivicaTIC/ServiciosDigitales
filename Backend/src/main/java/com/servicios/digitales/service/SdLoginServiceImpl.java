@@ -5,6 +5,7 @@ import com.servicios.digitales.model.EstadosSession;
 import com.servicios.digitales.model.SdSession;
 import com.servicios.digitales.model.SdUsuario;
 import com.servicios.digitales.repository.ISdSessionRepository;
+import com.servicios.digitales.repository.ISdSucursalRepository;
 import com.servicios.digitales.repository.ISdUsuarioRepository;
 import com.servicios.digitales.request.LoginRequest;
 import com.servicios.digitales.response.LoginResponse;
@@ -34,6 +35,8 @@ public class SdLoginServiceImpl implements ISdLoginService{
     private ISdSessionRepository sessionRepository;
     @Autowired
     private JwtUtils jwtUtils;
+    @Autowired
+    private ISdSucursalRepository sucursalRepository;
 
     @Override
     public ResponseEntity<?> login(HttpServletRequest request, LoginRequest loginRequest, BindingResult bindingResult, HttpServletResponse response) throws Exception {
@@ -94,7 +97,7 @@ public class SdLoginServiceImpl implements ISdLoginService{
                 _response.setMensaje("Login exitoso");
                 _response.setNombre(user.get().getUsuNombre() );
 
-
+                _response.setSucursales(sucursalRepository.listSucursalByUsuario(user.get().getId()));
                 // llenar el menu segun los permisos de los usuarios
                 _response.setPermisos(usuariosRepository.obtenerMenu(user.get().getId()));
                // Servidor servidor = servidorRepository.findById(Long.parseLong("1")).get();

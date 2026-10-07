@@ -23,4 +23,8 @@ public class SdSucursal {
     @JoinColumn(name = "sede_id")
     private SdSede sede;
 
+    @Column(name = "codigo", length = 100)
+    private String codigo;
+
+
 }

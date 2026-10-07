@@ -1,5 +1,6 @@
 package com.servicios.digitales.response;
 
+import com.servicios.digitales.model.SdSucursal;
 import com.servicios.digitales.model.SdUsuario;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
@@ -30,6 +31,10 @@ public class LoginResponse {
 
     @Schema(description = "Object Usuario")
     private SdUsuario usuario;
+
+    @Schema(description = "Listado de Sucursales")
+    private List<SdSucursal> sucursales;
+
 
 
 }
